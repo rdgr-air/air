@@ -1,0 +1,29 @@
+{
+  "name": "air-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/air-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "packages/air-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "air:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "air:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/air-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["air"]
+}

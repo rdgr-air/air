@@ -1,0 +1,41 @@
+{
+  "extends": [
+    "plugin:@nx/react",
+    "next",
+    "next/core-web-vitals",
+    "../../.eslintrc.json"
+  ],
+  "ignorePatterns": ["!**/*", ".next/**/*"],
+  "parserOptions": {
+    "project": "./tsconfig.*?.json"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "@next/next/no-html-link-for-pages": ["error", "packages/thegoodfruits/app"],
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "allowCircularSelfDependency": true
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    }
+  ],
+  "rules": {
+    "@next/next/no-html-link-for-pages": "off"
+  },
+  "env": {
+    "jest": true
+  }
+}

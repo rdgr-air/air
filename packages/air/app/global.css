@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Sophistica';
+  src: url('/fonts/sophistica.ttf');
+}
+
+html {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-size: 16px;
+  line-height: 1.5;
+  align-items: stretch;
+}
+
+body main {
+  flex-grow: 1;
+}
+
+body > footer {
+  flex-shrink: 0;
+}
+
+a[role="button"] {
+  text-decoration: none;
+}
+
+/* This div is added by NextUI. Need to fix the issues it introduces as these styles are supposed to belong to the <body> element */
+[data-overlay-container=true] {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: stretch;
+  & > * {
+    width: 100%;
+  }
+}

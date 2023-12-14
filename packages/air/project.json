@@ -1,0 +1,81 @@
+{
+  "name": "air",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/air",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/packages/air"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "packages/air"
+        },
+        "production": {}
+      },
+      "dependsOn": [
+        {
+          "target": "generate-static-tailwind-config"
+        }
+      ]
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "air:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "air:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "air:build:production",
+          "dev": false
+        }
+      },
+      "dependsOn": [
+        {
+          "target": "generate-static-tailwind-config"
+        }
+      ]
+    },
+    "export": {
+      "executor": "@nx/next:export",
+      "options": {
+        "buildTarget": "air:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/air/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/air/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "generate-static-tailwind-config": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "commands": [
+          "node ./packages/air/generate-static-tailwind-config.js"
+        ],
+        "parallel": false
+      }
+    }
+  },
+  "tags": []
+}
